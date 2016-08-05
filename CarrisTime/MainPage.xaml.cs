@@ -47,17 +47,25 @@ namespace CarrisTime
       
         private void ChooseTipe()
         {
+            Clean();
             TelaPrincipal.Children.Add(makeSettingsButton());
+
             /*
             Image logo = new Image();
-            ImageSource logoimg = new BitmapImage(new Uri("Assets/carris_logo.jpeg"));
-            logo.Source = logoimg;
-            
+            logo.Source = new BitmapImage(
+            new Uri("/Assets/carris_logo.jpg", UriKind.Absolute));
+            logo.VerticalAlignment = VerticalAlignment.Top;
+            logo.HorizontalAlignment = HorizontalAlignment.Center;
+            logo.Height = 50;
+
             TelaPrincipal.Children.Add(logo);
             */
 
+            #region listbox
+
             ListBox listbox = new ListBox();
             listbox.Margin = new Thickness(5,50,5,0);
+            listbox.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
             Button electrico = new Button();
             electrico.Content = "Electrico";
@@ -77,11 +85,50 @@ namespace CarrisTime
             elevador.Width = 150;
             elevador.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
+            #endregion
+
             listbox.Items.Add(electrico);
             listbox.Items.Add(autocarro);
             listbox.Items.Add(elevador);
 
             TelaPrincipal.Children.Add(listbox);
+        }
+
+        private void ChooseBus()
+        {
+            Clean();
+            TelaPrincipal.Children.Add(makeSettingsButton());
+
+            /*
+            Image logo = new Image();
+            logo.Source = new BitmapImage(
+            new Uri("/Assets/carris_logo.jpg", UriKind.Absolute));
+            logo.VerticalAlignment = VerticalAlignment.Top;
+            logo.HorizontalAlignment = HorizontalAlignment.Center;
+            logo.Height = 50;
+
+            TelaPrincipal.Children.Add(logo);
+            */
+
+            TextBlock tipe = new TextBlock();
+            tipe.Text = tipo;
+            tipe.VerticalAlignment = VerticalAlignment.Top;
+            tipe.HorizontalAlignment = HorizontalAlignment.Stretch;
+            tipe.Margin = new Thickness(5,75,5,0);
+
+            TelaPrincipal.Children.Add(tipe);
+
+            if (tipo.Equals("Electrico")){
+
+            }
+            else if (tipo.Equals("Autocarro"))
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         private Button makeSettingsButton()
@@ -108,17 +155,19 @@ namespace CarrisTime
         private void Electrico(object sender, RoutedEventArgs e)
         {
             tipo = "Electrico";
+            ChooseBus();
         }
 
-        private async void Autocarro(object sender, RoutedEventArgs e)
+        private void Autocarro(object sender, RoutedEventArgs e)
         {
             tipo = "Autocarro";
-            await ComposeEmail(codigo);
+            ChooseBus();
         }
 
         private void Elevador(object sender, RoutedEventArgs e)
         {
             tipo = "Elevador";
+            ChooseBus();
         }
 
         #region mail
